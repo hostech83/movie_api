@@ -1,18 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API Documentation</title>
-  </head>
-  <body>
-    <h1>API Documentation</h1>
-    <p>This is the documentation for the movie API.</p>
-    <h2>Endpoints</h2>
-    <ul>
-      <li><strong>GET /movies</strong> - Returns a list of top movies</li>
-      <li><strong>GET /</strong> - Returns a welcome message</li>
-      <li><strong>GET /secreturl</strong> - Returns a secret message</li>
-    </ul>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+</head>
+<body>
+  <h1>API Documentation</h1>
+
+  <div class="endpoint">
+    <h2>Welcome Message</h2>
+    <p><strong>Endpoint URL:</strong> /</p>
+    <p><strong>Method Type:</strong> GET</p>
+    <p><strong>Description:</strong> Returns a welcome message.</p>
+    <p><strong>Query Parameters:</strong> None</p>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "message": "Welcome to the Movie API!"
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Get All Movies</h2>
+    <p><strong>Endpoint URL:</strong> /movies</p>
+    <p><strong>Method Type:</strong> GET</p>
+    <p><strong>Description:</strong> Returns a list of all movies.</p>
+    <p><strong>Query Parameters:</strong> None</p>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    [
+      {
+        "title": "Inception",
+        "description": "A thief who steals corporate secrets...",
+        "genre": {
+          "name": "Sci-Fi",
+          "description": "Science Fiction"
+        },
+        "director": {
+          "name": "Christopher Nolan",
+          "bio": "British-American film director...",
+          "birthYear": 1970
+        },
+        "imageURL": "https://example.com/inception.jpg",
+        "featured": true
+      },
+      {
+        "title": "The Matrix",
+        "description": "A computer hacker learns from mysterious rebels...",
+        "genre": {
+          "name": "Sci-Fi",
+          "description": "Science Fiction"
+        },
+        "director": {
+          "name": "Lana Wachowski",
+          "bio": "American film director...",
+          "birthYear": 1965
+        },
+        "imageURL": "https://example.com/matrix.jpg",
+        "featured": true
+      }
+    ]
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Get Movie by Title</h2>
+    <p><strong>Endpoint URL:</strong> /movies/:title</p>
+    <p><strong>Method Type:</strong> GET</p>
+    <p><strong>Description:</strong> Returns details of a movie by title.</p>
+    <p><strong>Query Parameters:</strong></p>
+    <pre>
+    {
+      "title": "Inception"
+    }
+    </pre>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "title": "Inception",
+      "description": "A thief who steals corporate secrets...",
+      "genre": {
+        "name": "Sci-Fi",
+        "description": "Science Fiction"
+      },
+      "director": {
+        "name": "Christopher Nolan",
+        "bio": "British-American film director...",
+        "birthYear": 1970
+      },
+      "imageURL": "https://example.com/inception.jpg",
+      "featured": true
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Get Genre by Name</h2>
+    <p><strong>Endpoint URL:</strong> /genres/:name</p>
+    <p><strong>Method Type:</strong> GET</p>
+    <p><strong>Description:</strong> Returns details of a genre by name.</p>
+    <p><strong>Query Parameters:</strong></p>
+    <pre>
+    {
+      "name": "Sci-Fi"
+    }
+    </pre>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "name": "Sci-Fi",
+      "description": "Science Fiction"
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Get Director by Name</h2>
+    <p><strong>Endpoint URL:</strong> /directors/:name</p>
+    <p><strong>Method Type:</strong> GET</p>
+    <p><strong>Description:</strong> Returns details of a director by name.</p>
+    <p><strong>Query Parameters:</strong></p>
+    <pre>
+    {
+      "name": "Christopher Nolan"
+    }
+    </pre>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "name": "Christopher Nolan",
+      "bio": "British-American film director...",
+      "birthYear": 1970
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Get All Users</h2>
+    <p><strong>Endpoint URL:</strong> /users</p>
+    <p><strong>Method Type:</strong> GET</p>
+    <p><strong>Description:</strong> Returns a list of all users.</p>
+    <p><strong>Query Parameters:</strong> None</p>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    [
+      {
+        "username": "johndoe",
+        "email": "john@example.com",
+        "password": "password123",
+        "favoriteMovies": []
+      }
+    ]
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Register a New User</h2>
+    <p><strong>Endpoint URL:</strong> /users</p>
+    <p><strong>Method Type:</strong> POST</p>
+    <p><strong>Description:</strong> Registers a new user.</p>
+    <p><strong>Query Parameters:</strong> None</p>
+    <p><strong>Request Body:</strong></p>
+    <pre>
+    {
+      "username": "johndoe",
+      "email": "john@example.com",
+      "password": "password123"
+    }
+    </pre>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "message": "User registered"
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Update User Information</h2>
+    <p><strong>Endpoint URL:</strong> /users/:username</p>
+    <p><strong>Method Type:</strong> PUT</p>
+    <p><strong>Description:</strong> Updates a user's information.</p>
+    <p><strong>Query Parameters:</strong></p>
+    <pre>
+    {
+      "username": "johndoe"
+    }
+    </pre>
+    <p><strong>Request Body:</strong></p>
+    <pre>
+    {
+      "email": "newemail@example.com",
+      "password": "newpassword123"
+    }
+    </pre>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "message": "User info updated"
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Add Movie to User's Favorites</h2>
+    <p><strong>Endpoint URL:</strong> /users/:username/movies/:movieTitle</p>
+    <p><strong>Method Type:</strong> POST</p>
+    <p><strong>Description:</strong> Adds a movie to a user's list of favorite movies.</p>
+    <p><strong>Query Parameters:</strong></p>
+    <pre>
+    {
+      "username": "johndoe",
+      "movieTitle": "Inception"
+    }
+    </pre>
+    <p><strong>Request Body:</strong> None</p>
+    <p><strong>Response Format:</strong></p>
+    <pre>
+    {
+      "message": "Movie added to favorites"
+    }
+    </pre>
+  </div>
+
+  <div class="endpoint">
+    <h2>Remove Movie from User's Favorites</h2>
+    <p
+</body>
 </html>
+
+
