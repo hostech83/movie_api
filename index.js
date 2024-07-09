@@ -20,6 +20,22 @@ app.use(bodyParser.json());
 
 const passport = require("passport");
 require("./passport");
+const cors = require("cors");
+app.use(cors());
+
+// REPLACEMENT FOR "app.use(cors());" when you only wanna allow requests from specific origins
+/* let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+})); */
 
 const mongoURI =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/movie_api";
@@ -123,10 +139,14 @@ app.get("/users", async (req, res, next) => {
 app.post(
   "/users",
   [
-    check("username", "Username is required").notEmpty(),
-    check("password", "Password is required").notEmpty(),
-    check("email", "Email is required").isEmail(),
-    check("birthday", "Birthday is required").notEmpty(),
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - Not allowed."
+    ).isAlphanumeric(),
+    check("password", "Password is required").not().isEmpty(),
+    check("email", "Email does not appear to be valid").isEmail(),
+    check("birthday", "Birthday is required").not().isEmpty(),
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -234,6 +254,6 @@ require("./auth")(app);
 
 // Start the server
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`Your app is listening on port ${port}.`);
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
