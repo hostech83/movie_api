@@ -37,10 +37,12 @@ app.use(cors({
   }
 })); */
 
-const mongoURI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/movie_api";
 
-mongoose
+  mongoimport --uri mongodb+srv://hmsehel:0rap6ZW1mc7M7AQh@fez.4lncy1t.mongodb.net/movie_api --collection users --type json --file <FILENAME>
+
+  mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+  
+  /*mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -50,7 +52,7 @@ mongoose
   })
   .catch((err) => {
     console.error("Connection error", err);
-  });
+  }); */
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
