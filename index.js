@@ -37,7 +37,7 @@ app.use(cors({
   }
 })); */
 
-const mongoURI = process.env.CONNECTION_URI;
+const CONNECTION_URI = process.env.CONNECTION_URI;
 
 mongoose
   .connect(CONNECTION_URI, {
