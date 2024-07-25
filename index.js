@@ -36,20 +36,10 @@ app.use(cors({
     return callback(null, true);
   }
 })); */
-
-const CONNECTION_URI = process.env.CONNECTION_URI;
-
-mongoose
-  .connect(CONNECTION_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB successfully");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
+mongoose.connect(process.env.CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 /*mongoose
   .connect(mongoURI, {
