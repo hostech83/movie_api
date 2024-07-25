@@ -37,12 +37,21 @@ app.use(cors({
   }
 })); */
 
+const mongoURI = process.env.CONNECTION_URI;
 
-  mongoimport --uri mongodb+srv://hmsehel:0rap6ZW1mc7M7AQh@fez.4lncy1t.mongodb.net/movie_api --collection users --type json --file <FILENAME>
+mongoose
+  .connect(CONNECTION_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB successfully");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
 
-  mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-  
-  /*mongoose
+/*mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
