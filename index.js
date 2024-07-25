@@ -23,6 +23,7 @@ require("./passport");
 const cors = require("cors");
 app.use(cors());
 
+//mongo_URI=mongodb://127.0.0.1:27017/movie_api
 // REPLACEMENT FOR "app.use(cors());" when you only wanna allow requests from specific origins
 /* let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
@@ -36,10 +37,6 @@ app.use(cors({
     return callback(null, true);
   }
 })); */
-mongoose.connect(process.env.CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 /*mongoose
   .connect(mongoURI, {
@@ -52,6 +49,22 @@ mongoose.connect(process.env.CONNECTION_URI, {
   .catch((err) => {
     console.error("Connection error", err);
   }); */
+
+// Environment variable for MongoDB URI
+const CONNECTION_URI = process.env.CONNECTION_URI,
+
+// Connect to MongoDB
+mongoose
+  .connect(CONNECTION_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+  });
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
