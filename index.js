@@ -50,12 +50,9 @@ app.use(cors({
     console.error("Connection error", err);
   }); */
 
-// Environment variable for MongoDB URI
-const CONNECTION_URI = process.env.CONNECTION_URI,
-
 // Connect to MongoDB
 mongoose
-  .connect(CONNECTION_URI, {
+  .connect(process.env.CONNECTION_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
