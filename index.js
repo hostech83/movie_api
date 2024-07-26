@@ -37,6 +37,7 @@ app.use(cors({
     return callback(null, true);
   }
 })); */
+console.log("CONNECTION_URI:", process.env.CONNECTION_URI); // Debugging line
 
 mongoose
   .connect(process.env.CONNECTION_URI, {
@@ -57,6 +58,9 @@ app.use((err, req, res, next) => {
 });
 
 // Define API routes
+app.get("/", (req, res) => {
+  res.send("Welcome to Moro Flix API");
+});
 
 // GET all movies
 app.get(
