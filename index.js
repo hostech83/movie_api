@@ -141,9 +141,9 @@ app.get("/users", async (req, res, next) => {
 app.post(
   "/users",
   [
-    check("Username", "Username is required").isLength({ min: 5 }),
+    check("username", "Username is required").isLength({ min: 5 }),
     check(
-      "Username",
+      "username",
       "Username contains non alphanumeric characters - Not allowed."
     ).isAlphanumeric(),
     check("password", "Password is required").not().isEmpty(),
