@@ -146,6 +146,22 @@ app.get("/users", async (req, res, next) => {
   }
 });
 
+// Get user by username
+app.get(
+  "/users/:username",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    try {
+      const user = await User.findOne({ username: req.params.username });
+      if (!user) return res.status(404).json({ message: "User not found" });
+      return res.json(user);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+);
+
 // POST a new user
 app.post(
   "/users",
