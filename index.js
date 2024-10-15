@@ -34,14 +34,12 @@ let allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        let message =
-          "The CORS policy for this application doesn’t allow access from origin " +
-          origin;
-        return callback(new Error(message), false);
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true); // Allow requests with no origin (like mobile apps or Postman)
       }
-      return callback(null, true);
+      const message = `The CORS policy for this application doesn’t allow access from origin ${origin}`;
+      console.error(message); // Log blocked origin for debugging
+      return callback(new Error(message), false);
     },
   })
 );
@@ -63,7 +61,11 @@ mongoose
 // Error-handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: "Internal Server Error" });
+  if (err.message.includes("CORS")) {
+    res.status(403).json({ error: err.message });
+  } else {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // Define API routes
@@ -136,15 +138,15 @@ app.get(
   }
 );
 
-// GET all users
-//app.get("/users", async (req, res, next) => {
-try {
-  const users = await User.find();
-  res.status(200).json(users);
-} catch (error) {
-  next(error);
-}
-//});
+//GET all users
+app.get("/users", async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Get user by username
 app.get(
