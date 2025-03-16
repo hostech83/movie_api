@@ -32,6 +32,7 @@ let allowedOrigins = [
   "http://localhost:4200",
   "http://localhost:3000",
   "https://joyful-yeot-c8b973.netlify.app",
+  "https://hostech83.github.io",
 ];
 app.use(
   cors({
