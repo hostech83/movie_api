@@ -198,6 +198,14 @@ app.post(
     const { username, password, email, birthday } = req.body;
     const hashPassword = User.hashPassword(password);
 
+    const user = await Users.findOne({ username: username });
+
+    if (user) {
+      return res
+        .status(409)
+        .json({ errors: "Another user with the same username already exists" });
+    }
+
     try {
       const newUser = new User({
         username,
