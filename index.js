@@ -166,8 +166,17 @@ app.get(
     }
   }
 );
-
-// POST a new user
+/**
+ * @route POST /users
+ * @summary Register a new user
+ * @param {string} username.body.required - Must be at least 5 characters and alphanumeric
+ * @param {string} password.body.required - Required password field
+ * @param {string} email.body.required - Valid email address
+ * @param {string} birthday.body.required - User's date of birth
+ * @returns {object} 201 - The newly created user
+ * @returns {object} 400 - Validation errors
+ * @returns {object} 500 - Internal server error
+ */
 app.post(
   "/users",
   [
@@ -204,7 +213,14 @@ app.post(
   }
 );
 
-// PUT to update user info
+/**
+ * @route PUT /users/:username
+ * @summary Update user information
+ * @param {string} username.path.required - Username of the user to update
+ * @returns {object} 200 - Updated user object
+ * @returns {object} 404 - User not found
+ * @returns {object} 500 - Internal server error
+ */
 app.put(
   "/users/:username",
   passport.authenticate("jwt", { session: false }),
@@ -224,7 +240,15 @@ app.put(
   }
 );
 
-// POST to add a movie to the user's favorites
+/**
+ * @route POST /users/:username/movies/:movieId
+ * @summary Add a movie to a user's list of favorites
+ * @param {string} username.path.required - Username of the user
+ * @param {string} movieId.path.required - ID of the movie to add
+ * @returns {object} 200 - Updated user object with added movie
+ * @returns {object} 404 - User not found
+ * @returns {object} 500 - Internal server error
+ */
 app.post(
   "/users/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
@@ -245,7 +269,15 @@ app.post(
   }
 );
 
-// DELETE a movie from the user's favorites
+/**
+ * @route DELETE /users/:username/movies/:movieId
+ * @summary Remove a movie from a user's favorites
+ * @param {string} username.path.required - Username of the user
+ * @param {string} movieId.path.required - ID of the movie to remove
+ * @returns {object} 200 - Updated user object
+ * @returns {object} 404 - User not found
+ * @returns {object} 500 - Internal server error
+ */
 app.delete(
   "/users/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
@@ -264,7 +296,14 @@ app.delete(
   }
 );
 
-// DELETE a user
+/**
+ * @route DELETE /users/:username
+ * @summary Delete a user account
+ * @param {string} username.path.required - Username of the user to delete
+ * @returns {object} 200 - Confirmation message
+ * @returns {object} 404 - User not found
+ * @returns {object} 500 - Internal server error
+ */
 app.delete(
   "/users/:username",
   passport.authenticate("jwt", { session: false }),
@@ -280,11 +319,20 @@ app.delete(
     }
   }
 );
-
-// POST login
+/**
+ * @route POST /login
+ * @summary Authenticates user and returns a JWT token
+ * @description Handled in the external "auth.js" module. The user provides a username and password,
+ * and receives a signed JWT if credentials are valid.
+ */
 require("./auth")(app);
 
-// Start the server
+/**
+ * @function listen
+ * @summary Starts the server on the specified port
+ * @param {number} port - The port number from environment or default 8080
+ * @returns {void}
+ */
 const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log("Listening on Port " + port);
