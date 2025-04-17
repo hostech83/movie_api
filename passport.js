@@ -2,7 +2,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const Models = require("./models");
 const passportJWT = require("passport-jwt");
-const Users = Models.User;
+const User = Models.User;
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const jwtSecret = process.env.JWT_SECRET; // Use the JWT secret from environment variable
@@ -16,7 +16,7 @@ passport.use(
     },
     async (username, password, callback) => {
       try {
-        const user = await Users.findOne({ username: username });
+        const user = await User.findOne({ username: username });
 
         if (!user) {
           return callback({ message: "Incorrect username" }, false);
@@ -40,7 +40,7 @@ passport.use(
       secretOrKey: jwtSecret, // Make sure to use the secret key here
     },
     (jwtPayload, callback) => {
-      return Users.findById(jwtPayload._id)
+      return User.findById(jwtPayload._id)
         .then((user) => {
           return callback(null, user);
         })

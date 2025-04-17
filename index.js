@@ -198,7 +198,7 @@ app.post(
     const { username, password, email, birthday } = req.body;
     const hashPassword = User.hashPassword(password);
 
-    const user = await Users.findOne({ username: username });
+    const user = await User.findOne({ username: username });
 
     if (user) {
       return res
