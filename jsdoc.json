@@ -1,0 +1,10 @@
+{
+  "source": {
+    "include": ["."],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules|public)"
+  },
+  "opts": {
+    "destination": "./docs"
+  }
+}
