@@ -19,13 +19,13 @@
     <div class="endpoint">
       <h3>GET /movies/:title</h3>
       <p>Fetches a single movie by title.</p>
-      <pre><code>GET /movies/Inception</code></pre>
+      <pre><code>GET /movies</code></pre>
     </div>
 
     <div class="endpoint">
       <h3>GET /genres/:name</h3>
       <p>Fetches movies by genre name.</p>
-      <pre><code>GET /genres/Sci-Fi</code></pre>
+      <pre><code>GET /genres</code></pre>
     </div>
 
     <div class="endpoint">
@@ -37,7 +37,7 @@
     <div class="endpoint">
       <h3>GET /directors/:name</h3>
       <p>Fetches movies by director name.</p>
-      <pre><code>GET /directors/Christopher%20Nolan</code></pre>
+      <pre><code>GET /directors</code></pre>
     </div>
 
     <div class="endpoint">
@@ -51,28 +51,17 @@
       <p>Creates a new user.</p>
       <pre><code>POST /users</code></pre>
       <p>Example request body:</p>
-      <pre><code>{
-  "username": "num_paki",
-  "password": "test123",
-  "email": "num_paki@example.com"
-}</code></pre>
     </div>
-
     <div class="endpoint">
       <h3>PUT /users/:username</h3>
       <p>Updates user information by username.</p>
       <pre><code>PUT /users/new_user</code></pre>
       <p>Example request body:</p>
-      <pre><code>{
-  "password": "new_passwordtest123"
-  "email": "test_user@example.com"
-}</code></pre>
     </div>
-
     <div class="endpoint">
       <h3>POST /users/:username/movies/:movieId</h3>
       <p>Adds a movie to a user's favorites.</p>
-      <pre><code>POST /users/new_user/movies/667a55057c2505b791cdcdf6</code></pre>
+      <pre><code>POST /users/new_user/movies</code></pre>
     </div>
 
     <div class="endpoint">
