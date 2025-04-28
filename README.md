@@ -1,9 +1,9 @@
-Project Name: Moro-Flix API
+Project Name:
+
+# Moro-Flix API
 
 Brief Description:
 Moro-Flix is a RESTful API that serves as the backend for a movie database application. It provides endpoints for managing user data and movie information, including the ability to register users, authenticate, and perform CRUD (Create, Read, Update, Delete) operations on movies and user data. The API is built using Node.js, Express, and MongoDB, with Mongoose as the ODM (Object Data Modeling) library. Authentication is handled via JSON Web Tokens (JWT).
-
-# MyFlix API
 
 ---
 
@@ -83,7 +83,8 @@ Copy code
 npm install
 Configure environment (see next section)
 
-Environment Variables
+# Environment Variables
+
 Create a file named .env in the project root with:
 
 dotenv
@@ -110,7 +111,12 @@ CORS violations → 403
 
 Other server/database errors → 500
 
-API Endpoints
+# Usage
+
+See the API documentation for detailed info.
+
+# API Endpoints
+
 Authentication
 POST /login
 Authenticate with { username, password } → returns { user, token }
@@ -152,7 +158,8 @@ Add to favorites (JWT required)
 DELETE /users/:username/movies/:movieId
 Remove from favorites (JWT required)
 
-JSDoc API Docs
+# JSDoc API Docs
+
 Generate and browse up-to-date docs:
 
 bash
@@ -161,5 +168,6 @@ npm install --save-dev jsdoc
 npx jsdoc -c jsdoc.js
 Open the HTML files in the docs/ folder.
 
-Author
+# Author
+
 Houssni Msehel
